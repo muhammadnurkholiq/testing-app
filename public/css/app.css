@@ -8,3 +8,11 @@ body {
 .content {
     height: 100vh !important;
 }
+
+.nav-link:hover {
+    background-color: rgb(67, 76, 85) !important;
+}
+
+.nav-link.active {
+    background-color: rgb(67, 76, 85) !important;
+}

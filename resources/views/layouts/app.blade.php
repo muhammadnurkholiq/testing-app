@@ -18,15 +18,9 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
-    <style>
-        .nav-link:hover {
-            background-color: rgb(67, 76, 85) !important;
-        }
-
-        .nav-link.active {
-            background-color: rgb(67, 76, 85) !important;
-        }
-    </style>
+    <?php
+    $role = 'director';
+    ?>
 </head>
 
 <body>
@@ -42,7 +36,8 @@
                     <hr>
                     <ul class="nav nav-pills flex-column mb-auto">
                         <li class="mb-1">
-                            <a href="#" class="nav-link text-white active" onclick="handleClick(this)">
+                            <a href="/"
+                                class="nav-link text-white @if ($_SERVER['REQUEST_URI'] === '/' && !str_starts_with($_SERVER['REQUEST_URI'], '/*')) active @endif">
                                 <div class="d-flex align-items-center py-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="bi pe-none me-2" width="20"
                                         height="20" fill="currentColor" viewBox="0 0 16 16">
@@ -53,20 +48,24 @@
                                 </div>
                             </a>
                         </li>
+                        @if ($role === 'director')
+                            <li class="mb-1">
+                                <a href="{{ '/' . $role . '/user-management' }}"
+                                    class="nav-link text-white @if (str_starts_with($_SERVER['REQUEST_URI'], '/director/user-management')) active @endif">
+                                    <div class="d-flex align-items-center py-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="bi pe-none me-2" width="20"
+                                            height="20" fill="currentColor" viewBox="0 0 16 16">
+                                            <path
+                                                d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5.784 6A2.24 2.24 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.3 6.3 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5" />
+                                        </svg>
+                                        User Management
+                                    </div>
+                                </a>
+                            </li>
+                        @endif
                         <li class="mb-1">
-                            <a href="#" class="nav-link text-white" onclick="handleClick(this)">
-                                <div class="d-flex align-items-center py-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="bi pe-none me-2" width="20"
-                                        height="20" fill="currentColor" viewBox="0 0 16 16">
-                                        <path
-                                            d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5.784 6A2.24 2.24 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.3 6.3 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5" />
-                                    </svg>
-                                    User Management
-                                </div>
-                            </a>
-                        </li>
-                        <li class="mb-1">
-                            <a href="#" class="nav-link text-white" onclick="handleClick(this)">
+                            <a href="#"
+                                class="nav-link text-white @if (strpos($_SERVER['REQUEST_URI'], '/reimbursement') !== false) active @endif">
                                 <div class="d-flex align-items-center py-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="bi pe-none me-2" width="20"
                                         height="20" fill="currentColor" viewBox="0 0 16 16">
@@ -87,7 +86,7 @@
                             data-bs-toggle="dropdown" aria-expanded="false">
                             <img src="https://github.com/mdo.png" alt="" width="32" height="32"
                                 class="rounded-circle me-2">
-                            <strong>Kholiq</strong>
+                            <strong>Kholiq (Staff)</strong>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark text-small shadow" style="">
                             <li><a class="dropdown-item" href="#">Profile</a></li>
@@ -108,18 +107,6 @@
     </div>
 
     {{-- script --}}
-    <script>
-        function handleClick(link) {
-            // Hapus kelas 'active' dari semua tautan navigasi
-            const navLinks = document.querySelectorAll('.nav-link');
-            navLinks.forEach((navLink) => {
-                navLink.classList.remove('active');
-            });
-
-            // Tambahkan kelas 'active' ke tautan yang diklik
-            link.classList.add('active');
-        }
-    </script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
     </script>

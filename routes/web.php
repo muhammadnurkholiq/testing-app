@@ -16,3 +16,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/dashboard', function () {
+    return view('welcome');
+});
+
+Route::prefix('director')->group(function () {
+    Route::get('/user-management', function () {
+        return view('director.user_management.index');
+    });
+});
